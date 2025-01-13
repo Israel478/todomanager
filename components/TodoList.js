@@ -14,13 +14,21 @@ import {
   Button,
 } from "react-native";
 import { useSelector } from "react-redux";
+import { error } from "../lib/features/TodoList/reducers";
 
 export default function TodoList({ navigation }) {
-  const { todoList } = useSelector((state) => state.todoList);
-
   useEffect(() => {
     getTodos();
   }, []);
+  const { todoList, loading, error } = useSelector((state) => state.todoList);
+
+  if(loading === true){
+    return <Text style={styles.loading}>Loading...</Text>;
+  }
+  if(error){
+    return <Text style={styles.error}>Error: {error.message}</Text>;
+  }
+  
 
   const handleEdite = (e, todo) => {
     console.log("edite", todo);
@@ -40,20 +48,21 @@ export default function TodoList({ navigation }) {
         onPress={() => navigation.navigate("todoForm")}
       />
       <Text style={styles.title}>Todolist App!</Text>
-      <TextInput placeholder="search" style={styles.input} />
+      <TextInput placeholder="search"  style={styles.input} />
       <ScrollView>
         {todoList.map((todo, i) => (
           <View key={i} style={styles.todoContainer}>
-            <Text style={styles.todoText}>{todo.title}</Text>
+            <Text key={i} style={{...styles.todoText, backgroundColor:todo.completed? "green":""}}>
+            {todo.title}</Text>
             <View style={styles.iconContainer}>
               <TouchableOpacity onPress={(e) => handleEdite(e, todo)}>
                 <Ionicons name="pencil-outline" size={30} color="#000" />
               </TouchableOpacity>
               <TouchableOpacity onPress={(e) => handleDelete(e, todo)}>
-                <Ionicons name="trash-outline" size={30} color="#000" />
+                <Ionicons name="trash-outline" size={30} color="red" />
               </TouchableOpacity>
               <TouchableOpacity onPress={(e) => handleComplete(e, todo)}>
-                <Ionicons name="checkbox" size={30} color="#000" />
+                <Ionicons name="checkbox" size={30} color="green" />
               </TouchableOpacity>
             </View>
           </View>
@@ -64,6 +73,20 @@ export default function TodoList({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  error:{
+    color: "#fff",
+    backgroundColor:"#F0F0FO",
+    Text: "#3333333",
+    width: 400,
+    padding:10,
+  },
+  loading: {
+    color: "#fff",
+    backgroundColor:"#F0F0FO",
+    Text: "#3333333",
+    width: 400,
+    padding:10,
+  },
   addTodo: {
     color: "#fff",
     backgroundColor: "#F0F0F0",
