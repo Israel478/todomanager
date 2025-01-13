@@ -18,10 +18,10 @@ const { width } = Dimensions.get('window');
 
 // Predefined categories with colors
 const CATEGORIES = [
-  { id: 1, name: 'Personal', color: '#FF6B6B' },
-  { id: 2, name: 'Work', color: '#4ECDC4' },
-  { id: 3, name: 'Shopping', color: '#45B7D1' },
-  { id: 4, name: 'Important', color: '#96CEB4' },
+  { id: 1, name: 'Groceries', color: '#FF6B6B' },
+  { id: 2, name: 'Electronics', color: '#4ECDC4' },
+  { id: 3, name: 'Clothing', color: '#45B7D1' },
+  { id: 4, name: 'Others', color: '#96CEB4' },
 ];
 
 const PRIORITIES = [
@@ -30,12 +30,11 @@ const PRIORITIES = [
   { id: 'high', name: 'High', color: '#FF6B6B' },
 ];
 
-const TodoForm = ({ navigation, addTodo, editingTodo, onSubmit, onCancel }) => {
-  const [text, setText] = useState(editingTodo ? editingTodo.text : '');
-  const [selectedCategory, setSelectedCategory] = useState(editingTodo?.category || CATEGORIES[0]);
-  const [priority, setPriority] = useState(editingTodo?.priority || PRIORITIES[0]);
-  const [dueDate, setDueDate] = useState(editingTodo?.dueDate || null);
-  const [taskList, setTaskList] = useState([]);  // New state to hold tasks
+const ShoppingTodoForm = ({ navigation }) => {
+  const [text, setText] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[0]);
+  const [priority, setPriority] = useState(PRIORITIES[0]);
+  const [taskList, setTaskList] = useState([]); // Holds tasks
   const inputAnimation = useRef(new Animated.Value(0)).current;
   const buttonAnimation = useRef(new Animated.Value(0)).current;
 
@@ -56,18 +55,15 @@ const TodoForm = ({ navigation, addTodo, editingTodo, onSubmit, onCancel }) => {
 
   const handleSubmit = () => {
     if (text.trim()) {
-      const todo = {
+      const task = {
         id: Math.random().toString(), // Generate a unique ID
         text,
         category: selectedCategory,
         priority,
-        dueDate,
       };
-      addTodo(todo); // Add the task using the parent function
-      setTaskList((prevTasks) => [...prevTasks, todo]);  // Add the task to the state directly
+      setTaskList((prevTasks) => [...prevTasks, task]);  // Add the task to the state
       setText('');
-      Alert.alert('Task Added', 'Your task has been successfully added!');
-      navigation.goBack(); // Go back after submitting
+      Alert.alert('Task Added', 'Your shopping item has been successfully added!');
     } else {
       Alert.alert('Validation', 'Please enter a valid task!');
     }
@@ -95,7 +91,7 @@ const TodoForm = ({ navigation, addTodo, editingTodo, onSubmit, onCancel }) => {
           style={styles.input}
           value={text}
           onChangeText={setText}
-          placeholder="Add a todo"
+          placeholder="Add a shopping item"
           placeholderTextColor="#999"
           onSubmitEditing={handleSubmit}
         />
@@ -133,15 +129,9 @@ const TodoForm = ({ navigation, addTodo, editingTodo, onSubmit, onCancel }) => {
 
       <Animated.View style={{ opacity: buttonAnimation, transform: [{ scale: buttonAnimation }] }}>
         <TouchableOpacity onPress={handleSubmit} style={styles.addButton}>
-          <Text style={styles.buttonText}>{editingTodo ? 'Update' : 'Add Task'}</Text>
+          <Text style={styles.buttonText}>Add Item</Text>
         </TouchableOpacity>
       </Animated.View>
-
-      {editingTodo && (
-        <TouchableOpacity onPress={onCancel} style={[styles.button, styles.cancelButton]}>
-          <Text style={styles.buttonText}>Cancel</Text>
-        </TouchableOpacity>
-      )}
 
       {/* Task List */}
       <FlatList
@@ -242,10 +232,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  cancelButton: {
-    backgroundColor: '#8E8E93',
-    marginTop: 12,
-  },
   buttonText: {
     color: '#fff',
     fontSize: 16,
@@ -284,4 +270,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TodoForm;
+export default ShoppingTodoForm;
