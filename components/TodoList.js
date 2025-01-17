@@ -67,19 +67,20 @@ export default function TodoList({ navigation }) {
     return (
       <ImageBackground
         source={{
-          uri: 'https://media.istockphoto.com/id/1437928530/photo/soccer-ball-on-the-field.jpg?s=1024x1024&w=is&k=20&c=yFzPh2VwPQJL3G3lN5p_xW9-b2dr6m2hUKMZnnrKhz0='
+          uri: 'https://images.unsplash.com/photo-1486286701208-1d58e9338013?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  // Updated background image URL for loading state
         }}
-        style={styles.loadingBackground} // Full screen image
+        style={styles.loadingBackground} // Full-screen image for loading state
         resizeMode="cover"
       >
         <View style={styles.centered}>
           <ActivityIndicator size="large" color="#1976D2" />
-          <Text style={styles.loadingText}>Loading Todos...</Text>
-          <Text style={styles.welcomeText}>Welcome to my todo app</Text> {/* New welcome text */}
+          <Text style={styles.loadingText}>Loading...</Text>
+          <Text style={styles.welcomeText}>Welcome to my Football app</Text> {/* New welcome text */}
         </View>
       </ImageBackground>
     );
   }
+  
 
   if (error) {
     return <Text style={styles.error}>{error}</Text>;
@@ -87,19 +88,21 @@ export default function TodoList({ navigation }) {
 
   return (
     <ImageBackground
-      source={{ uri: 'https://media.istockphoto.com/id/637298374/photo/view-of-soccer-ball-on-athletic-field-in-stadium-arena.jpg?s=1024x1024&w=is&k=20&c=6cB8EYwQOoayoIzYxW4hHZXar9OlrshpfXzpArEgj38=' }} // Updated football field image URL
+      source={{
+        uri: 'https://plus.unsplash.com/premium_photo-1678249465288-0801b8514866?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  // Updated background image URL for the main screen
+      }}
       style={styles.background}
       resizeMode="cover"
     >
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, { opacity: fadeInAnim }]}>
         <TouchableOpacity
           style={styles.addTodo}
           onPress={() => navigation.navigate("todoForm")}
         >
-          <Text style={styles.addTodoText}>Add Todo</Text>
+          <Text style={styles.addTodoText}>Add Player</Text>
         </TouchableOpacity>
 
-        <Text style={styles.title}>Footballer Todo List</Text>
+        <Text style={styles.title}>Footballers List</Text>
 
         {/* Search Input */}
         <TextInput 
@@ -176,14 +179,14 @@ export default function TodoList({ navigation }) {
             ))}
           </ScrollView>
         </Animated.View>
-      </View>
+      </Animated.View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   loadingBackground: {
-    flex: 1,  // Full-screen background image
+    flex: 1,  // Full-screen background image for loading state
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
@@ -205,7 +208,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     fontWeight: "700",
-    color: "black",
+    color: "#111",
     marginBottom: 20,
     textAlign: "center",
     backgroundColor: 'linear-gradient(to right, #FF6F61, #FF3A3A)',  // Gradient effect

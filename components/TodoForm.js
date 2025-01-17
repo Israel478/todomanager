@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Animated, ActivityIndicator, ImageBackground, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo } from "../lib/features/TodoList/service"; // You may want to rename this function to `addFootballer` or `addItem`
+import { addTodo } from "../lib/features/TodoList/service"; // You may want to rename this function to addFootballer or addItem
 
 export default function FootballerForm({ navigation }) {
   const { loading, error } = useSelector((state) => state.todoList); // Adjust the Redux slice to store footballers
@@ -54,7 +54,7 @@ export default function FootballerForm({ navigation }) {
 
   return (
     <ImageBackground
-      source={{ uri: 'https://media.istockphoto.com/id/514461751/photo/soccer-ball-on-the-field-of-stadium.jpg?s=1024x1024&w=is&k=20&c=kyQFJM6oVbRzpg8XbWjqiUdiAZ_gijZsZ-hZjEUgY3E=' }} // Updated football field image URL
+      source={{ uri: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }} // Updated background image URL
       style={styles.background}
       resizeMode="cover"
     >
