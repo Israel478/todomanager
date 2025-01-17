@@ -80,8 +80,6 @@ export default function TodoList({ navigation }) {
       </ImageBackground>
     );
   }
-  
-  
 
   if (error) {
     return <Text style={styles.error}>{error}</Text>;
@@ -94,7 +92,6 @@ export default function TodoList({ navigation }) {
       resizeMode="cover"
     >
       <View style={styles.container}>
-        {/* Add Todo Button */}
         <TouchableOpacity
           style={styles.addTodo}
           onPress={() => navigation.navigate("todoForm")}
@@ -186,32 +183,32 @@ export default function TodoList({ navigation }) {
 
 const styles = StyleSheet.create({
   loadingBackground: {
-    flex: 1,  // Make sure the background image takes full screen
+    flex: 1,  // Full-screen background image
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
     height: "100%",
   },
   background: {
-    flex: 1,
-    justifyContent: "center",
+    flex: 1,  // Ensure the background image fills the screen
+    justifyContent: "flex-start", // Top-align content for better layout
     alignItems: "center",
     width: "100%",
     height: "100%",
   },
   container: {
-    flex: 1,
-    // No need for a background color here now, as we're overlaying on the image
+    flex: 1,  // Make the container fill the screen
     alignItems: "center",
+    paddingTop: 20, // Provide padding from the top (especially useful for the StatusBar)
     paddingHorizontal: 20,
   },
   title: {
     fontSize: 36,
     fontWeight: "700",
-    color: "#fff",
+    color: "black",
     marginBottom: 20,
     textAlign: "center",
-    backgroundColor: 'linear-gradient(to right, #FF6F61, #FF3A3A)',
+    backgroundColor: 'linear-gradient(to right, #FF6F61, #FF3A3A)',  // Gradient effect
     padding: 10,
     borderRadius: 5,
   },
