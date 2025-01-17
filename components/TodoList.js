@@ -69,7 +69,7 @@ export default function TodoList({ navigation }) {
         source={{
           uri: 'https://media.istockphoto.com/id/1437928530/photo/soccer-ball-on-the-field.jpg?s=1024x1024&w=is&k=20&c=yFzPh2VwPQJL3G3lN5p_xW9-b2dr6m2hUKMZnnrKhz0='
         }}
-        style={styles.loadingBackground}
+        style={styles.loadingBackground} // Full screen image
         resizeMode="cover"
       >
         <View style={styles.centered}>
@@ -80,6 +80,7 @@ export default function TodoList({ navigation }) {
       </ImageBackground>
     );
   }
+  
   
 
   if (error) {
@@ -185,7 +186,7 @@ export default function TodoList({ navigation }) {
 
 const styles = StyleSheet.create({
   loadingBackground: {
-    flex: 1,
+    flex: 1,  // Make sure the background image takes full screen
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
@@ -200,8 +201,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    paddingTop: 20,
+    // No need for a background color here now, as we're overlaying on the image
     alignItems: "center",
     paddingHorizontal: 20,
   },
@@ -288,9 +288,11 @@ const styles = StyleSheet.create({
   },
   centered: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#121212",
+    justifyContent: "center",  // Center the content
+    alignItems: "center",      // Center the content horizontally
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Optional: semi-transparent black to darken the background slightly
+    width: "100%",
+    height: "100%",
   },
   filterContainer: {
     flexDirection: "row",
@@ -333,5 +335,4 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: "center",
   }
-  
 });
